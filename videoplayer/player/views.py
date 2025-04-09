@@ -30,3 +30,4 @@ def upload_video(request):
     else:
         form = VideoForm()
     return render(request, 'player/upload_video.html', {'form': form})
+# yaha par changes
