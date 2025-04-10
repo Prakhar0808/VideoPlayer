@@ -33,16 +33,16 @@
     <!-- Search Form -->
     <form method="get" class="row g-2 mb-4">
         <div class="col-md-10">
-            <input type="text" name="q" class="form-control" placeholder="Search videos..." value="{{ query }}">
+            <input type="text" name="q" class="form-control" placeholder="Search videos..." value="{{ search_query }}">
         </div>
         <div class="col-md-2">
             <button type="submit" class="btn btn-primary w-100">Search</button>
         </div>
     </form>
 
-    {% if videos %}
+    {% if page_obj.object_list %}
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-            {% for video in videos %}
+            {% for video in page_obj.object_list %}
                 <div class="col">
                     <div class="card shadow-sm h-100">
                         <div class="ratio ratio-16x9">
@@ -52,7 +52,9 @@
                         </div>
                         <div class="card-body">
                             <h5 class="card-title">{{ video.title }}</h5>
-                            <p class="card-text"><small class="text-muted">Uploaded on {{ video.uploaded_at|date:"M d, Y" }}</small></p>
+                            <p class="card-text"><small class="text-muted">
+                                Uploaded on {{ video.uploaded_at|date:"M d, Y" }}
+                            </small></p>
                         </div>
                     </div>
                 </div>
@@ -62,24 +64,23 @@
         <!-- Pagination -->
         <nav class="mt-4">
             <ul class="pagination justify-content-center">
-                {% if videos.has_previous %}
-                    <li class="page-item"><a class="page-link" href="?page=1">First</a></li>
-                    <li class="page-item"><a class="page-link" href="?page={{ videos.previous_page_number }}">Previous</a></li>
+                {% if page_obj.has_previous %}
+                    <li class="page-item"><a class="page-link" href="?q={{ search_query }}&page=1">First</a></li>
+                    <li class="page-item"><a class="page-link" href="?q={{ search_query }}&page={{ page_obj.previous_page_number }}">Previous</a></li>
                 {% endif %}
 
-                <li class="page-item active"><a class="page-link">{{ videos.number }}</a></li>
+                <li class="page-item active"><a class="page-link">{{ page_obj.number }}</a></li>
 
-                {% if videos.has_next %}
-                    <li class="page-item"><a class="page-link" href="?page={{ videos.next_page_number }}">Next</a></li>
-                    <li class="page-item"><a class="page-link" href="?page={{ videos.paginator.num_pages }}">Last</a></li>
+                {% if page_obj.has_next %}
+                    <li class="page-item"><a class="page-link" href="?q={{ search_query }}&page={{ page_obj.next_page_number }}">Next</a></li>
+                    <li class="page-item"><a class="page-link" href="?q={{ search_query }}&page={{ page_obj.paginator.num_pages }}">Last</a></li>
                 {% endif %}
             </ul>
         </nav>
     {% else %}
         <div class="no-videos text-center">No videos found.</div>
     {% endif %}
-    <!-- chages made -->
 </div>
 <h3>This change is again from main branch</h3>
 </body>
-<!-- fir se change -->
+</html>

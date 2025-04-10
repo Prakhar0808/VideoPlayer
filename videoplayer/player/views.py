@@ -21,13 +21,15 @@ def video_list(request):
     }
     return render(request, 'player/video_list.html', context)
 
+
 def upload_video(request):
     if request.method == 'POST':
-        form = VideoForm(request.POST, request.FILES)
+        form = VideoForm(request.POST, request.FILES)  # ✅ request.FILES is required
         if form.is_valid():
             form.save()
             return redirect('video_list')
     else:
         form = VideoForm()
     return render(request, 'player/upload_video.html', {'form': form})
+
 # yaha par changes
