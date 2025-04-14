@@ -11,3 +11,5 @@ urlpatterns = [
 # settings.py (update for media files)
 MEDIA_URL = '/media/'
 # MEDIA_ROOT = BASE_DIR / 'media'
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
